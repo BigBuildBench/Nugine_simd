@@ -1,0 +1,31 @@
+[package]
+name = "unicode-simd"
+version = "0.9.0-dev"
+edition = "2021"
+description = "SIMD-accelerated Unicode validation and transcoding"
+license = "MIT"
+repository = "https://github.com/Nugine/simd"
+keywords = ["utf8", "unicode", "string", "validation", "simd"]
+categories = ["encoding", "algorithms", "no-std", "text-processing"]
+readme = "README.md"
+rust-version = "1.63"
+
+[package.metadata.docs.rs]
+all-features = true
+rustdoc-args = ["--cfg", "docsrs"]
+
+[features]
+default = ["std", "detect"]
+alloc = ["vsimd/alloc"]
+std = ["alloc", "vsimd/std"]
+detect = ["vsimd/detect"]
+unstable = ["vsimd/unstable"]
+
+[dependencies]
+
+[dev-dependencies]
+rand = "0.8.5"
+
+[target.'cfg(target_arch="wasm32")'.dev-dependencies]
+getrandom = { version = "0.2.8", features = ["js"] }
+wasm-bindgen-test = "0.3.34"
